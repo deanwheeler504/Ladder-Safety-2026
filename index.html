@@ -87,7 +87,7 @@
       <option>Plumbing</option>
       <option>Electrical</option>
       <option>HVAC</option>
-      <option>Carpentry / Handyman</option>
+      <option>Carpentry</option>
       <option>Data / Security / Solar / Appliances</option>
       <option>Other field role</option>
     </select>
@@ -285,7 +285,7 @@
     <div class="role" data-role="Plumbing"><div class="tip"><b>Plumbing:</b> hot water and solar jobs often mean lifting fittings, pipe and old components at roof height. Plan how gear gets up and down before you climb – rope, a second person, or a platform – and never carry it in your hands up the ladder.</div></div>
     <div class="role" data-role="Electrical"><div class="tip"><b>Electrical:</b> fibreglass only. Watch for service mains and overhead lines when raising or walking a ladder, and don't rest a ladder against a point of attachment or consumer mains.</div></div>
     <div class="role" data-role="HVAC"><div class="tip"><b>HVAC:</b> outdoor units on walls and roofs are heavy and awkward. If the lift or the job needs both hands, a ladder isn't the right platform – talk with your Service Manager about a platform ladder, scaffold or second person.</div></div>
-    <div class="role" data-role="Carpentry / Handyman"><div class="tip"><b>Carpentry / Handyman:</b> fascia, gutter and eave work tempts you to lean out. Move the ladder rather than reach, and never rest it on the gutter you're working on.</div></div>
+    <div class="role" data-role="Carpentry"><div class="tip"><b>Carpentry:</b> fascia, gutter and eave work tempts you to lean out. Move the ladder rather than reach, and never rest it on the gutter you're working on.</div></div>
     <div class="role" data-role="Data / Security / Solar / Appliances"><div class="tip"><b>Data / Security / Solar:</b> fibreglass ladders around any electrical work, cameras and antennas on fascias mean overreaching – move the ladder, don't stretch.</div></div>
   </div>
   <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
@@ -327,7 +327,7 @@
       <li>Heat and dehydration cause dizziness, sweaty hands and slower reactions.</li>
     </ul>
     <div class="do"><b>Before you climb, ask yourself:</b> Am I rushing? Am I drained or light-headed? Have I had water? If the answer worries you – stop, drink, take five, and set up properly. If it's late and the job can't be done safely, call your Service Manager about finishing it the next day or getting a second person.</div>
-    <div class="tip">Look out for your workmates too. If someone on the job looks cooked or is taking shortcuts with a ladder, say something – whoever they are.</div>
+    <div class="tip">Look out for your workmates too. If someone on the job looks fatigued or is taking shortcuts with a ladder, say something – whoever they are.</div>
   </div>
   <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
 </section>
@@ -414,7 +414,7 @@ document.getElementById('markBtn').onclick=()=>{
   if(pass){
     const subj='Toolbox – Ladder Safety 2026 – '+name;
     const now=new Date(),pad=n=>(n<10?'0':'')+n,tm=pad(now.getHours())+':'+pad(now.getMinutes());
-    const body=['Toolbox: Ladder Safety 2026','Version: Field techs · '+rl.value,'Name: '+name,'Email: '+em.value.trim(),'Role: '+rl.value,'Date: '+today,'Time: '+tm,'Score: '+score+'/'+QUIZ.length+' ('+pct+'%)','Result: PASSED','Declaration: I have completed this toolbox myself. I will check my ladder before use, stay within its load rating, set it up on a firm level base at 4:1, check what the top rests on, secure the top to something sturdy, keep three points of contact, stop when I am fatigued, and report any fall or near miss to my Service Manager.','Answers: '+QUIZ.map((x,i)=>(i+1)+(ans[i]===x.a?' ✓':' ✗')).join('  '),'','Module: Ladder Safety 2026 v1.4 (26/11/2026)'].join('\r\n');
+    const body=['Toolbox: Ladder Safety 2026','Version: Field techs · '+rl.value,'Name: '+name,'Email: '+em.value.trim(),'Role: '+rl.value,'Date: '+today,'Time: '+tm,'Score: '+score+'/'+QUIZ.length+' ('+pct+'%)','Result: PASSED','Declaration: I have completed this toolbox myself. I will check my ladder before use, stay within its load rating, set it up on a firm level base at 4:1, check what the top rests on, secure the top to something sturdy, keep three points of contact, stop when I am fatigued, and report any fall or near miss to my Service Manager.','Answers: '+QUIZ.map((x,i)=>(i+1)+(ans[i]===x.a?' ✓':' ✗')).join('  '),'','Module: Ladder Safety 2026 v1.5 (26/11/2026)'].join('\r\n');
     const href='mailto:dean.wheeler@fallonsolutions.com.au?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
     r.innerHTML='<h2>Well done, '+name.split(' ')[0]+'</h2><div class="result pass">'+score+'/10 ('+pct+'%) – PASSED</div><p class="big">Last step: tap the button below and hit <b>Send</b> on the email that opens. Your toolbox isn\'t recorded until that email is sent.</p><a class="mail" href="'+href+'">Send my completion email</a><p class="small">If the button doesn\'t open your email, send an email to dean.wheeler@fallonsolutions.com.au with the subject "'+subj+'" and your score.</p><button class="back" id="rev">Review my answers</button>';
   }else{
