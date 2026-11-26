@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbox – Ladder Safety 2026 | Fallon Solutions</title>
+<style>
+  :root{--navy:#09557C;--navy2:#09557C;--orange:#EE2E24;--green:#1f8a4c;--red:#c0392b;--amber:#e0a106;--bg:#f3f5f8;--ink:#1b2430;--muted:#5b6673;--card:#fff;--line:#dde3ea}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:17px}
+  header{background:var(--navy);color:#fff;padding:18px 18px 14px;position:sticky;top:0;z-index:5}
+  header .t{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#bfe3f6}
+  header{background:#fff!important;color:var(--ink)!important;border-bottom:4px solid #EE2E24}
+  header img{height:34px;display:block;margin-bottom:6px}
+  header .t{color:#1E94D2!important}
+  header h1{color:#09557C}
+  header h1{margin:2px 0 10px;font-size:22px}
+  .bar{height:8px;background:#E2E5EA;border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--orange);transition:width .3s}
+  main{max-width:760px;margin:0 auto;padding:16px}
+  section{display:none}
+  section.on{display:block}
+  .card{background:var(--card);border-radius:14px;padding:18px;margin:0 0 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);border:1px solid var(--line)}
+  h2{margin:0 0 6px;font-size:23px;color:var(--navy)}
+  h3{margin:14px 0 6px;font-size:18px;color:var(--navy2)}
+  .kicker{color:var(--orange);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+  ul{padding-left:20px;margin:6px 0}
+  li{margin:5px 0}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+  .stat{background:#09557C;color:#fff;border-radius:12px;padding:14px}
+  .stat b{display:block;font-size:30px;color:#fff;line-height:1.1}
+  .stat span{font-size:14px}
+  .src{font-size:12px;color:var(--muted)}
+  .do,.dont{border-radius:12px;padding:12px 14px;margin:10px 0}
+  .do{background:#e9f6ee;border-left:6px solid var(--green)}
+  .dont{background:#fbeceb;border-left:6px solid var(--red)}
+  .tip{background:#E6F3FB;border-left:6px solid #1E94D2;border-radius:12px;padding:12px 14px;margin:10px 0}
+  .fig{margin:10px 0;text-align:center}
+  .fig svg{width:100%;height:auto;max-width:560px}
+  .fig .cap{font-size:13px;color:var(--muted)}
+  .nav{display:flex;gap:10px;justify-content:space-between;margin:6px 0 30px}
+  button{font:inherit;border:0;border-radius:10px;padding:13px 18px;cursor:pointer;font-weight:700}
+  .next{background:#EE2E24;color:#fff;flex:1}
+  .back{background:#dfe5ec;color:var(--ink)}
+  .next:disabled{opacity:.45;cursor:not-allowed}
+  label.f{display:block;font-weight:700;margin:10px 0 4px}
+  input[type=text],select{width:100%;font:inherit;padding:12px;border:1px solid #b9c3cf;border-radius:10px;background:#fff}
+  .q{margin:0 0 16px}
+  .q p{font-weight:700;margin:0 0 6px}
+  .opt{display:block;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .opt input{margin-right:8px}
+  .opt.right{border-color:var(--green);background:#e9f6ee}
+  .opt.wrong{border-color:var(--red);background:#fbeceb}
+  .why{font-size:14px;color:var(--muted);margin:4px 0 0;display:none}
+  .result{font-size:20px;font-weight:800;margin:6px 0}
+  .pass{color:var(--green)} .fail{color:var(--red)}
+  .role{display:none}
+  .role.on{display:block}
+  .big{font-size:19px}
+  a.mail{display:block;text-align:center;background:var(--green);color:#fff;text-decoration:none;font-weight:800;padding:15px;border-radius:10px;margin:12px 0}
+  .small{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <img src="data:image/png;base64,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" alt="Fallon Solutions">
+  <div class="t">Safety toolbox · 2026</div>
+  <h1>Ladder Safety – set up right, climb smart</h1>
+  <div class="bar"><i id="prog"></i></div>
+</header>
+<main>
+
+<!-- 0 START -->
+<section class="on" data-step="0">
+  <div class="card">
+    <div class="kicker">About 15 minutes</div>
+    <h2>Before you start</h2>
+    <p>Ladders are on almost every job we do, so they're easy to stop thinking about. This toolbox walks through choosing, setting up, using and looking after a ladder, plus fatigue and what to do if someone falls.</p>
+    <p>Read each page, then answer 10 quick questions. You need <b>8 out of 10</b> to pass. At the end you'll send your result by email.</p>
+    <label class="f" for="nm">Full name</label>
+    <input type="text" id="nm" autocomplete="name" placeholder="First and last name">
+    <label class="f" for="em">Work email</label>
+    <input type="text" id="em" autocomplete="email" placeholder="name@fallonsolutions.com.au">
+    <label class="f" for="rl">Your trade / role</label>
+    <select id="rl">
+      <option value="">Select…</option>
+      <option>Plumbing</option>
+      <option>Electrical</option>
+      <option>HVAC</option>
+      <option>Carpentry / Handyman</option>
+      <option>Data / Security / Solar / Appliances</option>
+      <option>Other field role</option>
+    </select>
+  </div>
+  <div class="nav"><button class="next" id="startBtn" disabled>Start</button></div>
+</section>
+
+<!-- 1 WHY -->
+<section data-step="1">
+  <div class="card">
+    <div class="kicker">1 · Why it matters</div>
+    <h2>It's the short falls that get people</h2>
+    <p>Most of us picture a fall from a roof edge. In reality, most serious fall injuries in construction happen from <b>under 3 metres</b> – the height of a single-storey gutter – and ladders are a big part of that.</p>
+    <div class="stats">
+      <div class="stat"><b>83%</b><span>of serious fall injuries in construction happen below 3 m</span></div>
+      <div class="stat"><b>40%</b><span>of serious injuries from below 2 m involve a ladder</span></div>
+      <div class="stat"><b>Half</b><span>of fatal falls from roofs and ladders were from less than 4 m</span></div>
+    </div>
+    <p class="src">Sources: SafeWork SA falls data (construction); Safe Work Australia Construction Industry Profile.</p>
+    <h3>What a "small" fall can actually cost</h3>
+    <ul>
+      <li><b>Your body:</b> broken wrists, ribs and ankles, deep cuts, head injuries and back or spinal damage – all common from a 2–3 m fall onto concrete, a retaining wall or a step.</li>
+      <li><b>Your time:</b> weeks or months off the tools. Not driving, not lifting, not sleeping well.</li>
+      <li><b>Your work:</b> lost income and overtime, time off the tools, and a slow road back to full duties.</li>
+      <li><b>Home life:</b> not being able to pick up your kids, play sport, or get through a normal day without pain.</li>
+    </ul>
+    <div class="tip"><b>The good news:</b> almost every ladder fall comes down to a handful of things you control – the ladder you pick, how you set it up, how you use it, and how you're feeling. That's what the next pages cover.</div>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 2 CHOOSE -->
+<section data-step="2">
+  <div class="card">
+    <div class="kicker">2 · Pick the right ladder</div>
+    <h2>Is a ladder the right tool?</h2>
+    <p>Ladders are for <b>short, light work</b> where you can keep three points of contact. If the job needs both hands, pushing or pulling, lifting something heavy, or a long time up there, look at a platform ladder, mobile scaffold or EWP instead. Talk with your Service Manager if you don't have the right gear.</p>
+    <h3>Check the load rating – it's you <u>plus</u> everything you carry</h3>
+    <div class="fig">
+      <svg viewBox="0 0 560 210" role="img" aria-label="Load rating example">
+        <rect x="0" y="0" width="560" height="210" rx="14" fill="#09557C"/>
+        <g font-family="Arial" fill="#fff" text-anchor="middle">
+          <circle cx="70" cy="70" r="20" fill="#f28c28"/><rect x="50" y="94" width="40" height="52" rx="8" fill="#f28c28"/>
+          <text x="70" y="172" font-size="18">You</text><text x="70" y="192" font-size="21" font-weight="bold">110 kg</text>
+          <text x="140" y="120" font-size="34" fill="#ffcf9c">+</text>
+          <rect x="180" y="96" width="60" height="22" rx="5" fill="#ffcf9c"/><rect x="190" y="118" width="10" height="20" fill="#ffcf9c"/><rect x="220" y="118" width="10" height="20" fill="#ffcf9c"/>
+          <text x="210" y="172" font-size="18">Tool belt</text><text x="210" y="192" font-size="21" font-weight="bold">10 kg</text>
+          <text x="280" y="120" font-size="34" fill="#ffcf9c">+</text>
+          <rect x="320" y="84" width="54" height="56" rx="6" fill="#ffcf9c"/>
+          <text x="347" y="172" font-size="18">Parts</text><text x="347" y="192" font-size="21" font-weight="bold">15 kg</text>
+          <text x="410" y="120" font-size="34" fill="#ffcf9c">=</text>
+          <text x="490" y="100" font-size="34" font-weight="bold" fill="#f28c28">135 kg</text>
+          <text x="488" y="140" font-size="18" fill="#9fe0b7">✓ 150 kg ladder</text>
+          <text x="488" y="168" font-size="18" fill="#ff9b8f">✗ 120 kg ladder</text>
+        </g>
+      </svg>
+      <div class="cap">Know your number. Read the rating label before you climb – if you can't read it, don't use the ladder.</div>
+    </div>
+    <ul>
+      <li>Only use <b>industrial rated</b> ladders (AS/NZS 1892). Domestic ladders from home stay at home.</li>
+      <li>Industrial ladders are usually rated <b>120 kg or 150 kg</b>. The rating includes your body weight, clothes, tool belt and anything you carry up.</li>
+      <li>Near anything electrical, use a <b>non-conductive (fibreglass)</b> ladder – never aluminium.</li>
+      <li>Pick a ladder <b>long enough</b> that you don't have to stand near the top.</li>
+    </ul>
+    <h3>Dual purpose (step/extension) ladders</h3>
+    <ul>
+      <li>Hinges and locks must be <b>fully clicked in</b> before you load it – check, don't assume.</li>
+      <li>As a lean-to ladder it's shorter and lighter-duty than a full extension ladder, so it's easy to end up using it too steep, too short, or standing too high. If it barely reaches, get a longer ladder.</li>
+      <li>Follow the angle and use markings on the side of the ladder.</li>
+    </ul>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 3 SETUP -->
+<section data-step="3">
+  <div class="card">
+    <div class="kicker">3 · Set it up right</div>
+    <h2>Base, angle, top, tie</h2>
+    <div class="fig">
+      <svg viewBox="0 0 560 400" role="img" aria-label="Correct ladder setup diagram">
+        <rect width="560" height="400" fill="#eef3f8" rx="14"/>
+        <!-- ground -->
+        <rect x="0" y="350" width="560" height="50" fill="#9aa6b2"/>
+        <!-- house wall -->
+        <rect x="380" y="90" width="150" height="260" fill="#d9c6a5"/>
+        <!-- roof -->
+        <polygon points="350,92 545,92 545,40" fill="#7b8794"/>
+        <!-- fascia + gutter -->
+        <rect x="350" y="92" width="34" height="14" fill="#5d6873"/>
+        <rect x="340" y="104" width="30" height="16" rx="3" fill="#b8c1ca" stroke="#5d6873"/><rect x="361" y="101" width="12" height="24" rx="3" fill="#1f8a4c"/>
+        <!-- ladder: base x=290,y=350 to top x=372, y=30 -->
+        <g stroke="#f28c28" stroke-width="7" stroke-linecap="round">
+          <line x1="282" y1="350" x2="360" y2="38"/>
+          <line x1="300" y1="350" x2="378" y2="38"/>
+        </g>
+        <g stroke="#f28c28" stroke-width="4">
+          <line x1="288" y1="326" x2="306" y2="326"/><line x1="294" y1="302" x2="312" y2="302"/><line x1="300" y1="278" x2="318" y2="278"/><line x1="306" y1="254" x2="324" y2="254"/><line x1="312" y1="230" x2="330" y2="230"/><line x1="318" y1="206" x2="336" y2="206"/><line x1="324" y1="182" x2="342" y2="182"/><line x1="330" y1="158" x2="348" y2="158"/><line x1="336" y1="134" x2="354" y2="134"/><line x1="342" y1="110" x2="360" y2="110"/><line x1="348" y1="86" x2="366" y2="86"/><line x1="354" y1="62" x2="372" y2="62"/>
+        </g>
+                <!-- angle dims -->
+        <g stroke="#0f2a44" stroke-width="2" fill="none" stroke-dasharray="6 5">
+          <line x1="290" y1="370" x2="380" y2="370"/>
+          <line x1="410" y1="350" x2="410" y2="106"/>
+        </g>
+        <g font-family="Arial" font-size="21" fill="#0f2a44" font-weight="bold">
+          <text x="296" y="392" font-size="18">1 out</text>
+          <text x="418" y="240" font-size="18">4 up</text>
+          <text x="14" y="36">✓ 1 m above the gutter</text>
+          <text x="14" y="58" font-weight="normal" font-size="17">a handhold to get on and off</text>
+          <text x="14" y="100">✓ Check the top</text>
+          <text x="14" y="122" font-weight="normal" font-size="17">sound gutter, at a bracket</text>
+          <text x="14" y="168">✓ Top secured</text>
+          <text x="14" y="190" font-weight="normal" font-size="17">Lockjaw grip or strap</text>
+          <text x="14" y="282">✓ Firm, level base</text>
+          <text x="14" y="304" font-weight="normal" font-size="17">both feet supported</text>
+        </g>
+        <line x1="196" y1="95" x2="345" y2="108" stroke="#1f8a4c" stroke-width="2"/>
+        <line x1="190" y1="176" x2="358" y2="116" stroke="#1f8a4c" stroke-width="2"/><line x1="200" y1="300" x2="286" y2="346" stroke="#1f8a4c" stroke-width="2"/>
+      </svg>
+      <div class="cap">The 4:1 rule – 1 metre out for every 4 metres up – with at least 1 metre of ladder above the gutter.</div>
+    </div>
+
+    <h3>1. The base</h3>
+    <div class="do">✓ Firm, flat, level ground with both feet fully on it. Use proper ladder levellers on uneven ground.</div>
+    <div class="dont">✗ Don't stand the foot on a retaining wall, garden edge, step, paver lip, soft lawn or wet tiles. Don't pack it up with bricks or timber offcuts. If the base isn't right, move the ladder or change the setup.</div>
+
+    <h3>2. The angle</h3>
+    <ul>
+      <li>Use the <b>4:1 rule</b> – about 1 m out for every 4 m of height.</li>
+      <li>Quick check: stand with your toes at the feet of the ladder and arms straight out – your palms should just touch a rung.</li>
+      <li>Too steep and it can tip backwards. Too flat and the feet can kick out.</li>
+    </ul>
+
+    <h3>3. The top</h3>
+    <p>Houses don't have a dedicated spot for a ladder, so most of the time the top ends up on the wall or the gutter. Check it before you lean on it.</p>
+    <div class="dont">✗ Gutters aren't built to carry a ladder and a person. Old, rusted, plastic, sagging or loose gutters can bend or buckle, and the ladder moves with them.</div>
+    <div class="do">✓ <b>Before you climb, check the top:</b>
+      <ul>
+        <li>Working below the eaves? Rest it on the <b>wall</b> instead of the gutter.</li>
+        <li>If it has to go on the gutter, make sure it's <b>metal, sound and firmly fixed</b>. Sit the stiles <b>at or right beside a gutter bracket</b>, or near a corner where it's strongest.</li>
+        <li>Both stiles in full contact, and the ladder can't slide sideways along the gutter.</li>
+        <li>Keep your weight centred – don't push, pull or lever against the gutter while you work.</li>
+      </ul>
+    </div>
+    <div class="tip"><b>Gutter looks dodgy?</b> Don't rest on it or secure to it. Change the setup – move to a better spot or use a platform or step ladder. If none of that works, call your Service Manager before you climb.</div>
+    <ul><li>The ladder must extend <b>at least 1 m above the gutter</b> (or wherever you get on and off). That gives you something to hold onto as you step on or off.</li></ul>
+
+    <h3>4. Secure the top</h3>
+    <p>The top of the ladder must be secured to something sturdy before you work from it.</p>
+    <ul>
+      <li><b>Lockjaw ladder grip</b> (if you have one): hook it on the stile, clamp it under the lip of a <b>sound metal gutter</b> and turn to lock. Not for plastic gutters. Check it's locked before you climb.</li>
+      <li><b>No grip?</b> Ratchet strap the stiles (not the rungs) to something sturdy. The <b>gutter is the last choice</b> – only if it's metal, sound and firmly fixed, and strap at a bracket.</li>
+      <li><b>Can't secure the top?</b> Have someone foot the ladder and keep it to short, light work – or use a platform ladder or other access instead.</li>
+      <li>Secure the base too – good anti-slip feet, or tie or stake it where you can.</li>
+      <li>On extension ladders, check the locks are engaged and the sections overlap properly.</li>
+    </ul>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 4 USE -->
+<section data-step="4">
+  <div class="card">
+    <div class="kicker">4 · Using it</div>
+    <h2>Three points, centred, not too high</h2>
+    <div class="fig">
+      <svg viewBox="0 0 560 420" role="img" aria-label="Safe zones on a ladder">
+        <rect width="560" height="420" rx="14" fill="#eef3f8"/>
+        <rect x="40" y="20" width="10" height="385" fill="#0f2a44"/><rect x="120" y="20" width="10" height="385" fill="#0f2a44"/>
+        <g fill="#0f2a44"><rect x="50" y="40" width="70" height="6"/><rect x="50" y="80" width="70" height="6"/><rect x="50" y="120" width="70" height="6"/><rect x="50" y="160" width="70" height="6"/><rect x="50" y="200" width="70" height="6"/><rect x="50" y="240" width="70" height="6"/><rect x="50" y="280" width="70" height="6"/><rect x="50" y="320" width="70" height="6"/><rect x="50" y="360" width="70" height="6"/></g>
+        <rect x="30" y="20" width="110" height="120" fill="#c0392b" opacity=".25"/>
+        <rect x="50" y="140" width="70" height="265" fill="#1f8a4c" opacity=".18"/>
+        <g font-family="Arial" fill="#0f2a44">
+          <text x="160" y="52" font-size="24" font-weight="bold" fill="#c0392b">No-stand zone</text>
+          <text x="160" y="80" font-size="19">Top 3 rungs of a lean-to ladder,</text>
+          <text x="160" y="104" font-size="19">top step / cap of a step ladder</text>
+          <text x="160" y="182" font-size="24" font-weight="bold" fill="#1f8a4c">Belt buckle inside stiles</text>
+          <text x="160" y="210" font-size="19">Body centred. Need to lean out?</text>
+          <text x="160" y="234" font-size="19">Climb down and move the ladder.</text>
+          <text x="160" y="310" font-size="24" font-weight="bold">3 points of contact</text>
+          <text x="160" y="338" font-size="19">2 feet + 1 hand, or 2 hands + 1 foot</text>
+          <text x="160" y="362" font-size="19">– up, working and coming down</text>
+        </g>
+      </svg>
+    </div>
+    <ul>
+      <li><b>Face the ladder</b> going up and down. Hands on the stiles or rungs, not full of gear.</li>
+      <li>Carry tools in a <b>belt or pouch</b>. Lift parts and heavier gear up with a rope/hoist, or pass them up – don't climb one-handed with them.</li>
+      <li><b>One person</b> on the ladder at a time.</li>
+      <li>No pushing, pulling or levering hard from a ladder – removing old fittings, brackets or units can throw you off balance when something lets go.</li>
+      <li>Check overhead for <b>powerlines</b> and service mains before you raise or move a ladder. Lower it to move it.</li>
+      <li>Don't climb in strong wind or rain, or on wet/muddy rungs and boots.</li>
+      <li>Keep the area at the base clear and, where people walk past, set up a barrier or cone.</li>
+    </ul>
+    <div class="role" data-role="Plumbing"><div class="tip"><b>Plumbing:</b> hot water and solar jobs often mean lifting fittings, pipe and old components at roof height. Plan how gear gets up and down before you climb – rope, a second person, or a platform – and never carry it in your hands up the ladder.</div></div>
+    <div class="role" data-role="Electrical"><div class="tip"><b>Electrical:</b> fibreglass only. Watch for service mains and overhead lines when raising or walking a ladder, and don't rest a ladder against a point of attachment or consumer mains.</div></div>
+    <div class="role" data-role="HVAC"><div class="tip"><b>HVAC:</b> outdoor units on walls and roofs are heavy and awkward. If the lift or the job needs both hands, a ladder isn't the right platform – talk with your Service Manager about a platform ladder, scaffold or second person.</div></div>
+    <div class="role" data-role="Carpentry / Handyman"><div class="tip"><b>Carpentry / Handyman:</b> fascia, gutter and eave work tempts you to lean out. Move the ladder rather than reach, and never rest it on the gutter you're working on.</div></div>
+    <div class="role" data-role="Data / Security / Solar / Appliances"><div class="tip"><b>Data / Security / Solar:</b> fibreglass ladders around any electrical work, cameras and antennas on fascias mean overreaching – move the ladder, don't stretch.</div></div>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 5 MAINTAIN -->
+<section data-step="5">
+  <div class="card">
+    <div class="kicker">5 · Look after it</div>
+    <h2>30-second check before every climb</h2>
+    <ul>
+      <li><b>Stiles:</b> no bends, dents, cracks or splits. Fibreglass shouldn't look chalky or have fibres showing (sun damage).</li>
+      <li><b>Rungs/steps:</b> tight, not bent, clean – no grease, mud or silicone.</li>
+      <li><b>Feet:</b> all there, rubber not worn through, swivels working.</li>
+      <li><b>Locks, hinges and spreaders:</b> engage fully and click in; no loose rivets.</li>
+      <li><b>Labels:</b> rating and use labels readable.</li>
+      <li><b>Ropes/pulleys</b> (extension ladders): not frayed, pulley turns freely.</li>
+    </ul>
+    <div class="dont"><b>Found a problem?</b> Don't use it. Tag it "DO NOT USE", take it out of service and tell your Service Manager so it gets repaired or replaced. Never "make do" with a damaged ladder, and never patch one up yourself.</div>
+    <h3>On the van</h3>
+    <ul>
+      <li>Strap ladders down properly on the rack – loose ladders get bent and shaken apart.</li>
+      <li>Don't stack heavy gear on top of them.</li>
+      <li>Keep them clean and dry; wash off mud, sealant and concrete.</li>
+    </ul>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 6 FATIGUE -->
+<section data-step="6">
+  <div class="card">
+    <div class="kicker">6 · Fatigue and heat</div>
+    <h2>Tired legs, tired decisions</h2>
+    <p>Ladders need balance, grip and attention. All three drop off when you're tired, hot or dehydrated – and Brisbane summers make that worse.</p>
+    <ul>
+      <li>Long days, early starts, after-hours callouts and back-to-back jobs all add up.</li>
+      <li>Late in the day is when people rush to get finished – that's exactly when shortcuts get taken on setup.</li>
+      <li>Heat and dehydration cause dizziness, sweaty hands and slower reactions.</li>
+    </ul>
+    <div class="do"><b>Before you climb, ask yourself:</b> Am I rushing? Am I drained or light-headed? Have I had water? If the answer worries you – stop, drink, take five, and set up properly. If it's late and the job can't be done safely, call your Service Manager about finishing it the next day or getting a second person.</div>
+    <div class="tip">Look out for your workmates too. If someone on the job looks cooked or is taking shortcuts with a ladder, say something – whoever they are.</div>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Next</button></div>
+</section>
+
+<!-- 7 IF A FALL -->
+<section data-step="7">
+  <div class="card">
+    <div class="kicker">7 · If someone falls</div>
+    <h2>Get help, get checked, report it</h2>
+    <h3>If someone else falls</h3>
+    <ul>
+      <li>Make the area safe, then check on them. If they hit their head, neck or back, <b>don't move them</b> unless they're in danger – keep them still.</li>
+      <li>Call <b>000</b> for anything more than a minor knock, then call your Service Manager.</li>
+      <li>Give first aid within your training (control bleeding, keep them warm and talking).</li>
+    </ul>
+    <h3>If you fall</h3>
+    <div class="dont"><b>Adrenaline hides injuries.</b> Broken ribs, internal injuries and back damage often don't feel serious straight away. Feeling "okay" isn't the same as being okay.</div>
+    <ul>
+      <li>Stop work. Call your Service Manager straight away.</li>
+      <li><b>Get checked by a doctor or hospital – and don't drive yourself.</b> Have someone take you, or call an ambulance.</li>
+      <li>Report it, even if you feel fine. Every fall and near miss gets reported – it's how we fix the cause for everyone.</li>
+    </ul>
+    <div class="tip">Nobody gets in trouble for reporting a fall or near miss. Not reporting is what stops us fixing it.</div>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next">Go to questions</button></div>
+</section>
+
+<!-- 8 QUIZ -->
+<section data-step="8">
+  <div class="card">
+    <div class="kicker">Questions</div>
+    <h2>10 quick questions</h2>
+    <p class="small">Choose one answer for each. You need 8/10 to pass.</p>
+    <div id="quiz"></div>
+  </div>
+  <div class="nav"><button class="back">Back</button><button class="next" id="markBtn">Check my answers</button></div>
+</section>
+
+<!-- 9 RESULT -->
+<section data-step="9">
+  <div class="card">
+    <div class="kicker">Result</div>
+    <div id="res"></div>
+  </div>
+</section>
+
+</main>
+<script>
+const QUIZ=[
+ {q:"A ladder is rated 120 kg. What does that 120 kg need to cover?",o:["Just your body weight","Your body weight plus tool belt, clothes and anything you carry up","Only the tools and materials","The weight of the ladder itself"],a:1,w:"The load rating is everything on the ladder – you, your gear and what you carry."},
+ {q:"What is the correct angle for a lean-to ladder?",o:["2:1 – 1 m out for every 2 m up","1:1 – as far out as it is high","4:1 – 1 m out for every 4 m up","As close to vertical as possible"],a:2,w:"4:1 is the rule. Too steep tips back, too flat kicks out."},
+ {q:"On a house, the top of your ladder has to go on the gutter. What should you do first?",o:["Nothing – gutters are strong enough","Check the gutter is metal, sound and firmly fixed, and sit the stiles at or beside a gutter bracket","Put it on the middle of the longest run of gutter","Lean it on the downpipe instead"],a:1,w:"Gutters can buckle and move. Check them, and place the stiles at a bracket where the gutter is strongest."},
+ {q:"The only spot for the ladder foot is the top of a garden retaining wall. What should you do?",o:["Use it – it's solid","Pack the low side with a couple of bricks","Find firm, level ground or change the access method (platform, scaffold, different position)","Get someone to hold it and go quickly"],a:2,w:"The base must be firm, flat and level, with both feet fully supported."},
+ {q:"You don't have a Lockjaw ladder grip on this job. How do you secure the top of the ladder?",o:["Don't bother – it's single storey","Ratchet strap the stiles to something sturdy, using the gutter only as a last choice and only if it's sound","Hook a bungee cord over the gutter","Wedge the ladder harder against the gutter"],a:1,w:"The top must be secured to something sturdy. The gutter is the last choice, and only if it's metal, sound and firmly fixed."},
+ {q:"Which of these is three points of contact?",o:["One hand on the ladder, one hand holding a part, one foot on the rung","Two feet on the rung and one hand on the ladder","Two feet on the rung and your belly against the ladder","Standing on the top cap with both hands free"],a:1,w:"Two feet + one hand, or two hands + one foot."},
+ {q:"You need to remove a heavy, stuck fitting at gutter height. What's the best approach?",o:["Climb up and lever it off – it won't take long","Use a platform ladder, scaffold or second person and plan how it comes down","Lean out from the side of the ladder for better leverage","Stand on the top rung to get above it"],a:1,w:"Forceful or heavy work isn't ladder work. Pick the right platform and plan the lift."},
+ {q:"During your pre-use check you find a bent stile. What do you do?",o:["Straighten it and carry on","Use it carefully today and report it later","Tag it DO NOT USE, take it out of service and tell your Service Manager","Swap it with a workmate's van"],a:2,w:"Damaged ladders come out of service straight away."},
+ {q:"It's 4:30pm, hot, and you've been flat out all day. You still have roof-height work to do. What's the right call?",o:["Push through and get it done","Stop, drink, take a break, set up properly – and if it can't be done safely, call your Service Manager","Skip the tie-off to save time","Use a shorter ladder so it's quicker to set up"],a:1,w:"Fatigue and heat affect balance and judgement. Slow down, or reschedule with your Service Manager."},
+ {q:"You fall about 2 m and feel a bit sore but 'okay'. What should you do?",o:["Finish the job and see how you feel tomorrow","Drive yourself to the hospital","Stop work, call your Service Manager, get checked by a doctor without driving yourself, and report it","Don't mention it unless it gets worse"],a:2,w:"Adrenaline hides injuries. Get checked, don't drive yourself, and report it."}
+];
+const steps=[...document.querySelectorAll('section')];
+let cur=0;
+function show(n){steps[cur].classList.remove('on');cur=n;steps[cur].classList.add('on');document.getElementById('prog').style.width=(n/(steps.length-1)*100)+'%';window.scrollTo(0,0);}
+document.querySelectorAll('.next').forEach(b=>{if(b.id!=='markBtn')b.onclick=()=>show(cur+1)});
+document.querySelectorAll('.back').forEach(b=>b.onclick=()=>show(cur-1));
+const em=document.getElementById('em'),nm=document.getElementById('nm'),rl=document.getElementById('rl'),sb=document.getElementById('startBtn');
+function chk(){sb.disabled=!(nm.value.trim().split(/\s+/).length>=2&&/@/.test(em.value)&&rl.value);
+  document.querySelectorAll('.role').forEach(r=>r.classList.toggle('on',r.dataset.role===rl.value));}
+[nm,em,rl].forEach(e=>{e.oninput=chk;e.onchange=chk});
+const qz=document.getElementById('quiz');
+QUIZ.forEach((x,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<p>'+(i+1)+'. '+x.q+'</p>'+x.o.map((o,j)=>'<label class="opt"><input type="radio" name="q'+i+'" value="'+j+'">'+o+'</label>').join('')+'<div class="why">'+x.w+'</div>';
+  qz.appendChild(d);});
+document.getElementById('markBtn').onclick=()=>{
+  let ans=QUIZ.map((x,i)=>{const s=document.querySelector('input[name=q'+i+']:checked');return s?+s.value:-1});
+  if(ans.includes(-1)){alert('Please answer all 10 questions.');return;}
+  let score=0;
+  QUIZ.forEach((x,i)=>{const opts=qz.children[i].querySelectorAll('.opt');opts.forEach(o=>o.classList.remove('right','wrong'));
+    if(ans[i]===x.a)score++;else{opts[ans[i]].classList.add('wrong');}
+    opts[x.a].classList.add('right');qz.children[i].querySelector('.why').style.display='block';});
+  const pct=Math.round(score/QUIZ.length*100),pass=score>=8,name=nm.value.trim();
+  const today=new Date().toLocaleDateString('en-AU',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const r=document.getElementById('res');
+  if(pass){
+    const subj='Toolbox – Ladder Safety 2026 – '+name;
+    const now=new Date(),pad=n=>(n<10?'0':'')+n,tm=pad(now.getHours())+':'+pad(now.getMinutes());
+    const body=['Toolbox: Ladder Safety 2026','Version: Field techs · '+rl.value,'Name: '+name,'Email: '+em.value.trim(),'Role: '+rl.value,'Date: '+today,'Time: '+tm,'Score: '+score+'/'+QUIZ.length+' ('+pct+'%)','Result: PASSED','Declaration: I have completed this toolbox myself. I will check my ladder before use, stay within its load rating, set it up on a firm level base at 4:1, check what the top rests on, secure the top to something sturdy, keep three points of contact, stop when I am fatigued, and report any fall or near miss to my Service Manager.','Answers: '+QUIZ.map((x,i)=>(i+1)+(ans[i]===x.a?' ✓':' ✗')).join('  '),'','Module: Ladder Safety 2026 v1.4 (26/11/2026)'].join('\r\n');
+    const href='mailto:dean.wheeler@fallonsolutions.com.au?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+    r.innerHTML='<h2>Well done, '+name.split(' ')[0]+'</h2><div class="result pass">'+score+'/10 ('+pct+'%) – PASSED</div><p class="big">Last step: tap the button below and hit <b>Send</b> on the email that opens. Your toolbox isn\'t recorded until that email is sent.</p><a class="mail" href="'+href+'">Send my completion email</a><p class="small">If the button doesn\'t open your email, send an email to dean.wheeler@fallonsolutions.com.au with the subject "'+subj+'" and your score.</p><button class="back" id="rev">Review my answers</button>';
+  }else{
+    r.innerHTML='<h2>Not quite</h2><div class="result fail">'+score+'/10 ('+pct+'%) – you need 8/10</div><p>Have a look at the questions you got wrong (marked in red, with the reason underneath), then have another go.</p><button class="next" id="retry">Review and try again</button>';
+  }
+  show(9);
+  const rv=document.getElementById('rev')||document.getElementById('retry');
+  rv.onclick=()=>{show(8);};
+};
+</script>
+</body>
+</html>
